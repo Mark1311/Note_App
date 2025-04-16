@@ -10,13 +10,13 @@ const Singup = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault()
         try{
-            const response = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
+            const response = await axios.post('http://localhost:5000/api/auth/register', {name,email,password});
             console.log(response)
         }catch(error){
             console.log(error)
 
         }
-    }
+    };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -44,7 +44,7 @@ const Singup = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700"> Name</label>
+            <label className="block text-gray-700"> Password</label>
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
