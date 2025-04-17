@@ -1,6 +1,7 @@
 import express from 'express';
 import User from '../models/User.js'
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 
 const router = express.Router()
 
@@ -26,6 +27,33 @@ router.post('/register', async(req, res) =>{
     catch(error){
         console.log(error.message)
         return res.status(500).json({success: false, message: "Error in Adding User"})
+    }
+
+})
+
+router.post('/login', async(req, res) =>{
+    try{
+        const { email, password } = req.body;
+        console.log("Incoming Data:", req.body);
+        const user = await User.findOne({email});
+        if(!user){
+            return res.status(401).json({success: false, message: "User not Available"})
+        }
+
+        const checkpassword = await bcrypt.compare(password, user.password)
+
+        if(!checkpassword){
+            return res.status(401).json({success: false, message: "Wrong Password"})
+        }
+
+        const token = jwt.sign({id:user._id}, "thisismySecetekey65876jbkjgki", {expiresIn:"5h"})
+
+        return res.status(200).json({success: true, token, user:{name:user.name}, message: "login Successfully"})
+
+    }
+    catch(error){
+        console.log(error.message)
+        return res.status(500).json({success: false, message: "Error in Login Server"})
     }
 
 })

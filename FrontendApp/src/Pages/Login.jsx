@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+ 
 
-const Singup = () => {
+const Login = () => {
 
-    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const navigate = useNavigate;
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
         try{
-            const response = await axios.post('http://localhost:5000/api/auth/register', {name,email,password});
-            console.log(response)
+            const response = await axios.post('http://localhost:5000/api/auth/login', {email,password});
             if(response.data.success){
-              navigate('/login')
+                localStorage.setItem("token", response.data.token)
+                navigate("/")
             }
+            console.log(response)
         }catch(error){
             console.log(error)
 
@@ -26,18 +27,8 @@ const Singup = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="border shadow p-6 w-80 bg-white">
-        <h2 className="text-2xl font-bold mb-4">Singup</h2>
+        <h2 className="text-2xl font-bold mb-4">Login</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700"> Name</label>
-            <input
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter Name"
-              className="w-full px-3 py-2 border"
-              required
-            />
-          </div>
           <div className="mb-4">
             <label className="block text-gray-700"> Name</label>
             <input
@@ -63,10 +54,10 @@ const Singup = () => {
               type="submit"
               className="w-full bg-teal-600 text-white py-2"
             >
-              Singup
+              Login
             </button>
             <p className="text-center">
-              Alredy Have a Account <Link to = "/login">Login</Link>
+              Don't Have Account <Link to = "/register">Register</Link>
             </p>
           </div>
         </form>
@@ -75,4 +66,4 @@ const Singup = () => {
   );
 };
 
-export default Singup;
+export default Login;
