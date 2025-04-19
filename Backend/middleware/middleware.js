@@ -24,7 +24,7 @@ const middleware = async (req, res, next) =>{
         req.user = newUser;
         next()
     }catch(error){
-        return res.status(50).json({success: false, message:"please login"})
+        return res.status(500).json({success: false, message:"please login"})
 
     }
 }

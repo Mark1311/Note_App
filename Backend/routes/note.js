@@ -23,9 +23,9 @@ router.post('/add',middleware , async (req, res)=>{
     }
 })
 
-router.get('/', async (req, res)=>{
+router.get('/', middleware,  async (req, res)=>{
     try{
-        const notes = await Note.find()
+        const notes = await Note.find({userId:req.user.id})
         return res.status(200).json({success:true, notes})
     }catch(error){
         return res.status(500).json({success: false, message: "can't retrive notes"})

@@ -1,4 +1,5 @@
-import React, { useContext, createContext, useState } from "react";
+import axios from "axios";
+import React, { useContext, createContext, useState, useEffect } from "react";
 
 const authContext = createContext();
 
@@ -7,8 +8,34 @@ const ContextProvider = ({ children }) => {
 
   const login = (user) => setUser(user);
   // const logout = () => setUser(null);
+
+  const logout =() =>{
+    localStorage.removeItem('token');
+    setUser(null)
+  }
+
+  useEffect(()=>{
+    const verifyUser = async ()=>{
+      try{
+        const res = await axios.get("http://localhost:5000/api/auth/verify", {
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        });
+        if(res.data.success){
+          setUser(res.data.user)
+        }else [
+          setUser(null)
+        ]
+      }catch(error){
+        console.log(error)
+      }      
+    }
+    verifyUser()
+  },[])
+
   return (
-    <authContext.Provider value={{ user, login }}>
+    <authContext.Provider value={{ user, login, logout }}>
       {children}
     </authContext.Provider>
   );

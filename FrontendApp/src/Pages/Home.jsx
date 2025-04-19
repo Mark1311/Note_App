@@ -3,20 +3,33 @@ import NavBar from "../Components/NavBar";
 import NoteModel from "../Components/NoteModel";
 import axios from "axios";
 import NoteCart from "../Components/NoteCart";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [filteredNotes, setFilteredNotes] = useState(false)
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState(null)
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
     fetchNotes();
   }, []);
 
+  useEffect(()=>{
+    setFilteredNotes(
+      notes.filter((note) => note.title.toLowerCase().includes(query.toLocaleLowerCase())) ||
+      notes.filter((note) => note.description.toLowerCase().includes(query.toLocaleLowerCase()))
+     )
+  }, [query, notes])
+
   const fetchNotes = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/note");
-      console.log("Fetching notes", data.notes);
+      const { data } = await axios.get("http://localhost:5000/api/note", {
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem("tekon")}`
+        }
+      });
       setNotes(data.notes);
     } catch (error) {
       console.log(error);
@@ -67,7 +80,9 @@ export default function Home() {
         }
       );
       if(response.data.success){
+        toast.success("note deleted")
         fetchNotes()
+        
       }
     }catch(error){
       console.log(error)
@@ -102,10 +117,9 @@ export default function Home() {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <NavBar />
+      <NavBar setQuery={setQuery}/>
       <div className="px-8 pt-4 grid grid-cols-1 md:grid-cols-3 gap-5">
-        {notes && notes.length > 0 ? (
-          notes.map((note) => <NoteCart key={note._id} note={note} onEdit={onEdit} deleteNote={deleteNote} />)
+        {filteredNotes.length > 0 ? filteredNotes.map((note) => (<NoteCart key={note._id} note={note} onEdit={onEdit} deleteNote={deleteNote} />)
         ) : (
           <p>No notes available.</p>
         )}
