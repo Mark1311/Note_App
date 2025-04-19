@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
+import Note from '../models/Note.js'
 
 const middleware = async (req, res, next) =>{
     try{
@@ -15,7 +16,17 @@ const middleware = async (req, res, next) =>{
         }
 
         const user = await User.findById({_id : decoded.id})
+
+        if(!user){
+            return res.status(404).json({success: false, message:"No User"})
+        }
+        const newUser = {user : user.name, id : user._id}
+        req.user = newUser;
+        next()
     }catch(error){
+        return res.status(50).json({success: false, message:"please login"})
 
     }
 }
+
+export default middleware;

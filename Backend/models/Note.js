@@ -1,8 +1,8 @@
-import mongoose, { Types } from "mongoose"
+import mongoose from "mongoose"
 
 const NoteSchema = new mongoose.Schema({
-    title :{type:"String", require: True},
-    description :{type: "String", require: true},
+    title :{type:"String", required : true},
+    description :{type: "String", required : true},
     userId : { type: mongoose.Schema.Types.ObjectId, ref:'User'},
 });
 

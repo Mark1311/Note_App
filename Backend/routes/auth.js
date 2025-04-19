@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../models/User.js'
+import Note from '../models/Note.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 
