@@ -4,7 +4,7 @@ import middleware from '../middleware/middleware.js';
 
 const router = express.Router()
 
-router.post('/add',middleware , async (req, res)=>{
+router.post('/add', middleware , async (req, res)=>{
     try{
         const { title, description } = req.body;
         
@@ -12,10 +12,8 @@ router.post('/add',middleware , async (req, res)=>{
             title, description,
             userId : req.user.id
         });
-
         await newNote.save()
         return res.status(200).json({success: true, message: "Notes Create Succesfully"})
-
     }
     catch(error){
         console.log(error.message)
@@ -23,7 +21,7 @@ router.post('/add',middleware , async (req, res)=>{
     }
 })
 
-router.get('/', middleware,  async (req, res)=>{
+router.get('/', middleware,  async(req, res)=>{
     try{
         const notes = await Note.find({userId:req.user.id})
         return res.status(200).json({success:true, notes})

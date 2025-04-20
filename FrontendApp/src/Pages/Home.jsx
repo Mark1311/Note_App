@@ -27,7 +27,7 @@ export default function Home() {
     try {
       const { data } = await axios.get("http://localhost:5000/api/note", {
         headers:{
-          Authorization: `Bearer ${localStorage.getItem("tekon")}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         }
       });
       setNotes(data.notes);

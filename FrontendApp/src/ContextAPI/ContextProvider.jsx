@@ -14,26 +14,40 @@ const ContextProvider = ({ children }) => {
     setUser(null)
   }
 
-  useEffect(()=>{
-    const verifyUser = async ()=>{
-      try{
+  useEffect(() => {
+    const verifyUser = async () => {
+      const token = localStorage.getItem("token");
+  
+      // Token null ho toh verify request mat bhejo
+      if (!token) {
+        console.log("No token found in localStorage");
+        setUser(null);
+        return;
+      }
+  
+      try {
         const res = await axios.get("http://localhost:5000/api/auth/verify", {
-          headers:{
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          }
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-        if(res.data.success){
-          setUser(res.data.user)
-        }else [
-          setUser(null)
-        ]
-      }catch(error){
-        console.log(error)
-      }      
-    }
-    verifyUser()
-  },[])
-
+  
+        console.log("Token:", token); // Debug ke liye
+  
+        if (res.data.success) {
+          setUser(res.data.user);
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Verify error:", error); // Error clearly dikhaye console me
+        setUser(null);
+      }
+    };
+  
+    verifyUser();
+  }, []);
+  
   return (
     <authContext.Provider value={{ user, login, logout }}>
       {children}

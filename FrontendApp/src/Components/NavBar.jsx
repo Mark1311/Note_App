@@ -24,7 +24,7 @@ const NavBar = ({setQuery}) => {
             <Link to="/login" className="bg-blue-500 px-4 py-2 rounded mr-4">
               Login
             </Link>
-            <Link to="/singup" className="bg-blue-500 px-4 py-2 rounded mr-4">
+            <Link to="/register" className="bg-blue-500 px-4 py-2 rounded mr-4">
               Singup
             </Link>
           </>
