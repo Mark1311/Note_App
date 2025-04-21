@@ -6,8 +6,12 @@ const authContext = createContext();
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = (user) => setUser(user);
-  // const logout = () => setUser(null);
+  // const login = (user) => setUser(user);
+  const login = (userData, token) => {
+    localStorage.setItem("token", token);
+    setUser(userData);
+  };
+  
 
   const logout =() =>{
     localStorage.removeItem('token');

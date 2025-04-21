@@ -20,7 +20,7 @@ const middleware = async (req, res, next) =>{
         if(!user){
             return res.status(404).json({success: false, message:"No User"})
         }
-        const newUser = {user : user.name, id : user._id}
+        const newUser = {name : user.name, id : user._id}
         req.user = newUser;
         next()
     }catch(error){
