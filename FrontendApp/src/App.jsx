@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import "./index.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
