@@ -28,43 +28,66 @@ const Login = () => {
     };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="border shadow p-6 w-80 bg-white">
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700"> Name</label>
-            <input
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
-              className="w-full px-3 py-2 border"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700"> Password</label>
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              className="w-full px-3 py-2 border"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <button
-              type="submit"
-              className="w-full bg-teal-600 text-white py-2"
-            >
-              Login
-            </button>
-            <p className="text-center">
-              Don't Have Account <Link to = "/register">Register</Link>
-            </p>
-          </div>
-        </form>
-      </div>
+    <div className="flex items-center justify-center min-h-screen bg-[#080710]">
+      <form
+        onSubmit={handleSubmit}
+        className="backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl text-white rounded-lg p-10 w-full max-w-md"
+      >
+        <h2 className="text-2xl font-bold text-center mb-6">Login Here</h2>
+
+        <div className="mb-4">
+          <label className="block mb-1 text-white" htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter email"
+            className="w-full px-4 py-2 rounded bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white"
+            required
+          />
+        </div>
+
+        <div className="mb-6">
+          <label className="block mb-1 text-white" htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
+            className="w-full px-4 py-2 rounded bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-white text-black py-2 font-semibold rounded hover:bg-gray-200 transition"
+        >
+          Log In
+        </button>
+
+        <div className="flex gap-4 mt-4">
+          <button
+            type="button"
+            className="w-full bg-white/20 text-white py-2 rounded hover:bg-white/40 transition"
+          >
+            <i className="fab fa-google mr-2"></i>Github
+          </button>
+          <button
+            type="button"
+            className="w-full bg-white/20 text-white py-2 rounded hover:bg-white/40 transition"
+          >
+            <i className="fab fa-facebook mr-2"></i>Linkedin
+          </button>
+        </div>
+
+        <p className="text-center mt-4 text-white text-sm">
+          Don't have an account?{" "}
+          <Link to="/register" className="underline text-white hover:text-gray-300">
+            Register
+          </Link>
+        </p>
+      </form>
     </div>
   );
 };
