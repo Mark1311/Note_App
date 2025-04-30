@@ -4,6 +4,7 @@ import NoteModel from "../Components/NoteModel";
 import axios from "axios";
 import NoteCart from "../Components/NoteCart";
 import { toast } from "react-toastify";
+import { useAuth } from "../ContextAPI/ContextProvider";
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -11,10 +12,15 @@ export default function Home() {
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState(null)
   const [query, setQuery] = useState('')
+  const { user } = useAuth();
 
   useEffect(() => {
-    fetchNotes();
-  }, []);
+    if (user) {
+      fetchNotes(); // user logged in hai -> fetch notes
+    } else {
+      setNotes([]); // user null ho gaya -> clear notes
+    }
+  }, [user]);
 
   useEffect(()=>{
     setFilteredNotes(
