@@ -8,14 +8,17 @@ const NoteModel = ({ closeModal, addNotes, currentNote, EditNotes }) => {
     if (currentNote) {
       setTitle(currentNote.title);
       setDescription(currentNote.description);
+    } else {
+      // ✅ Jab currentNote null ho (new note), to fields blank ho
+      setTitle("");
+      setDescription("");
     }
   }, [currentNote]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentNote) {
-      EditNotes(currentNote._id, title, description)
-
+      EditNotes(currentNote._id, title, description);
     } else {
       addNotes(title, description);
     }

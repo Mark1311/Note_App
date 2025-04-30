@@ -37,6 +37,7 @@ export default function Home() {
   };
   const closeModal = () => {
     setModalOpen(false);
+    setCurrentNote(null); // ✅ Reset current note
   };
 
   const onEdit= (note) =>{
@@ -126,7 +127,10 @@ export default function Home() {
       </div>
 
       <button
-        onClick={() => setModalOpen(true)}
+        onClick={() => {
+          setCurrentNote(null);      // ✅ Just to be safe
+          setModalOpen(true);
+        }}
         className="fixed right-4 bottom-4 text-2xl bg-teal-500 text-white font-boldp-4 rounded-full"
       >
         +
