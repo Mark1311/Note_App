@@ -8,10 +8,10 @@ import { useAuth } from "../ContextAPI/ContextProvider";
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [filteredNotes, setFilteredNotes] = useState(false)
+  const [filteredNotes, setFilteredNotes] = useState(false);
   const [notes, setNotes] = useState([]);
-  const [currentNote, setCurrentNote] = useState(null)
-  const [query, setQuery] = useState('')
+  const [currentNote, setCurrentNote] = useState(null);
+  const [query, setQuery] = useState("");
   const { user } = useAuth();
 
   useEffect(() => {
@@ -22,19 +22,23 @@ export default function Home() {
     }
   }, [user]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setFilteredNotes(
-      notes.filter((note) => note.title.toLowerCase().includes(query.toLocaleLowerCase())) ||
-      notes.filter((note) => note.description.toLowerCase().includes(query.toLocaleLowerCase()))
-     )
-  }, [query, notes])
+      notes.filter((note) =>
+        note.title.toLowerCase().includes(query.toLocaleLowerCase())
+      ) ||
+        notes.filter((note) =>
+          note.description.toLowerCase().includes(query.toLocaleLowerCase())
+        )
+    );
+  }, [query, notes]);
 
   const fetchNotes = async () => {
     try {
       const { data } = await axios.get("http://localhost:5000/api/note", {
-        headers:{
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       setNotes(data.notes);
     } catch (error) {
@@ -46,11 +50,10 @@ export default function Home() {
     setCurrentNote(null); // ✅ Reset current note
   };
 
-  const onEdit= (note) =>{
-    setCurrentNote(note)
-    setModalOpen(true)
-  }
-
+  const onEdit = (note) => {
+    setCurrentNote(note);
+    setModalOpen(true);
+  };
 
   const addNotes = async (title, description) => {
     try {
@@ -76,26 +79,24 @@ export default function Home() {
     }
   };
 
-  const deleteNote = async (id) =>{
-    try{
+  const deleteNote = async (id) => {
+    try {
       const response = await axios.delete(
         `http://localhost:5000/api/note/${id}`,
         {
-          headers:{
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-          }
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
-      if(response.data.success){
-        toast.success("note deleted")
-        fetchNotes()
-        
+      if (response.data.success) {
+        toast.success("note deleted");
+        fetchNotes();
       }
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-
-  }
+  };
 
   const EditNotes = async (id, title, description) => {
     try {
@@ -119,14 +120,21 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
-
-  }
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <NavBar setQuery={setQuery}/>
+      <NavBar setQuery={setQuery} />
       <div className="px-8 pt-4 grid grid-cols-1 md:grid-cols-3 gap-5">
-        {filteredNotes.length > 0 ? filteredNotes.map((note) => (<NoteCart key={note._id} note={note} onEdit={onEdit} deleteNote={deleteNote} />)
+        {filteredNotes.length > 0 ? (
+          filteredNotes.map((note) => (
+            <NoteCart
+              key={note._id}
+              note={note}
+              onEdit={onEdit}
+              deleteNote={deleteNote}
+            />
+          ))
         ) : (
           <p>No notes available.</p>
         )}
@@ -134,14 +142,22 @@ export default function Home() {
 
       <button
         onClick={() => {
-          setCurrentNote(null);      // ✅ Just to be safe
+          setCurrentNote(null); // ✅ Just to be safe
           setModalOpen(true);
         }}
-        className="fixed right-4 bottom-4 text-2xl bg-teal-500 text-white font-boldp-4 rounded-full"
+        className="fixed right-4 bottom-4 text-3xl bg-teal-500 text-white font-bold p-4 rounded-full shadow-lg hover:bg-teal-600 transition duration-300"
       >
         +
       </button>
-      {isModalOpen && <NoteModel closeModal={closeModal} addNotes={addNotes} currentNote={currentNote} EditNotes={EditNotes} deleteNote={deleteNote}/>}
+      {isModalOpen && (
+        <NoteModel
+          closeModal={closeModal}
+          addNotes={addNotes}
+          currentNote={currentNote}
+          EditNotes={EditNotes}
+          deleteNote={deleteNote}
+        />
+      )}
     </div>
   );
 }
