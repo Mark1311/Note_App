@@ -46,6 +46,7 @@ export default function Home() {
       console.log(error);
     }
   };
+  
   const closeModal = () => {
     setModalOpen(false);
     setCurrentNote(null); // ✅ Reset current note

@@ -1,5 +1,7 @@
 import mongoose from "mongoose"
 
+// Note Schema(Database Table)
+
 const NoteSchema = new mongoose.Schema({
     title :{type:"String", required : true},
     description :{type: "String", required : true},
@@ -7,4 +9,5 @@ const NoteSchema = new mongoose.Schema({
 });
 
 const Note = mongoose.model("Note", NoteSchema);
+
 export default Note;

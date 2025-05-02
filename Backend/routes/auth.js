@@ -7,6 +7,8 @@ import middleware from '../middleware/middleware.js';
 
 const router = express.Router()
 
+// Registration URL
+
 router.post('/register', async(req, res) =>{
     try{
         const { name, email, password } = req.body;
@@ -32,6 +34,8 @@ router.post('/register', async(req, res) =>{
     }
 
 })
+
+// Login URL
 
 router.post('/login', async(req, res) =>{
     try{
@@ -59,6 +63,8 @@ router.post('/login', async(req, res) =>{
     }
 
 });
+
+// Verify Middleware 
 
 router.get('/verify', middleware, (req, res)=>{
     return res.status(200).json({success:true, user: req.user})

@@ -4,6 +4,8 @@ import middleware from '../middleware/middleware.js';
 
 const router = express.Router()
 
+// Note Add
+
 router.post('/add', middleware , async (req, res)=>{
     try{
         const { title, description } = req.body;
@@ -21,6 +23,8 @@ router.post('/add', middleware , async (req, res)=>{
     }
 })
 
+// Note Get
+
 router.get('/', middleware,  async(req, res)=>{
     try{
         const notes = await Note.find({userId:req.user.id})
@@ -29,6 +33,8 @@ router.get('/', middleware,  async(req, res)=>{
         return res.status(500).json({success: false, message: "can't retrive notes"})
     }
 })
+
+// Note Update
 
 router.put('/:id', async (req, res)=>{
     try{
@@ -39,6 +45,8 @@ router.put('/:id', async (req, res)=>{
         return res.status(500).json({success:false, message:"can't update notes"})
     }
 })
+
+// Note Delete
 
 router.delete('/:id', async (req, res)=>{
     try{
