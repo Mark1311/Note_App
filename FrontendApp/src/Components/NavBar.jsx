@@ -17,7 +17,7 @@ const NavBar = ({ setQuery }) => {
       </div>
       <input
         type="text"
-        placeholder="Serach Notes"
+        placeholder="Serach Notes Here...."
         className="bg-gray-900 px-4 py-2 rounded w-100"
         onChange={(e) => setQuery(e.target.value)}
       />
@@ -28,7 +28,7 @@ const NavBar = ({ setQuery }) => {
               Login
             </Link>
             <Link to="/register" className="bg-blue-500 px-4 py-2 rounded mr-4">
-              Singup
+              Signup
             </Link>
           </>
         ) : (
@@ -37,7 +37,7 @@ const NavBar = ({ setQuery }) => {
               <img src={face} alt="Logo" className="w-8 h-8" />
               <span className="mx-4 flex-1 text-center">{user.name}</span>
               <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={logout}>
-                LogOut
+                Logout
               </button>
             </div>
           </>

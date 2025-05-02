@@ -5,6 +5,7 @@ import axios from "axios";
 import NoteCart from "../Components/NoteCart";
 import { toast } from "react-toastify";
 import { useAuth } from "../ContextAPI/ContextProvider";
+import book from "../Img/book.png";
 
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -71,6 +72,7 @@ export default function Home() {
       );
       console.log(response);
       if (response.data.success) {
+        toast.success("Note Added SuccessFully");
         fetchNotes();
         closeModal();
       }
@@ -114,6 +116,7 @@ export default function Home() {
       );
       console.log(response);
       if (response.data.success) {
+        toast.success("Note Edit Sucess");
         fetchNotes();
         closeModal();
       }
@@ -123,7 +126,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="min-h-screen">
       <NavBar setQuery={setQuery} />
       <div className="px-8 pt-4 grid grid-cols-1 md:grid-cols-3 gap-5">
         {filteredNotes.length > 0 ? (
@@ -136,7 +139,15 @@ export default function Home() {
             />
           ))
         ) : (
-          <p>No notes available.</p>
+          <div className="col-span-full flex flex-col items-center justify-center text-center mt-10">
+            <h1 className="text-xl font-semibold mb-4" style={{ filter: "blur(1.25px)"}}>No Notes Available...!!!</h1>
+            <img
+              src={book}
+              alt="Logo"
+              className="w-120  h-auto"
+              style={{ filter: "blur(4.5px)"}}
+            />
+          </div>
         )}
       </div>
 

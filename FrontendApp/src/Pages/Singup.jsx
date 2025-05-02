@@ -43,7 +43,7 @@ const Singup = () => {
           <input
             type="text"
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter Name"
+            placeholder="Enter name here..."
             className="w-full px-4 py-2 rounded bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white"
             required
           />
@@ -56,7 +56,7 @@ const Singup = () => {
           <input
             type="email"
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter email"
+            placeholder="Enter email here..."
             className="w-full px-4 py-2 rounded bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white"
             required
           />
@@ -69,7 +69,7 @@ const Singup = () => {
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter password"
+            placeholder="Enter password here..."
             className="w-full px-4 py-2 rounded bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white"
             required
           />
@@ -83,12 +83,13 @@ const Singup = () => {
         </button>
 
         <p className="text-center mt-4 text-white text-sm">
-          Already have an account?{" "}
+          Already have an account?
           <Link
             to="/login"
             className="underline text-white hover:text-gray-300"
           >
-            Login
+            <br/>
+            Login here...
           </Link>
         </p>
       </form>
