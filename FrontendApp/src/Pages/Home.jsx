@@ -36,7 +36,8 @@ export default function Home() {
 
   const fetchNotes = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/note", {
+      const { data } = await axios.get("https://note-app-l2da.onrender.com/api/note", {
+        // const { data } = await axios.get("http://localhost:5000/api/note", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

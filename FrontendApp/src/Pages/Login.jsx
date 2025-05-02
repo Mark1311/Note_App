@@ -15,7 +15,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://note-app-l2da.onrender.com/api/auth/login",
+        // "http://localhost:5000/api/auth/login",
         { email, password }
       );
       if (response.data.success) {

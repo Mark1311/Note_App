@@ -12,7 +12,8 @@ const Singup = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://note-app-l2da.onrender.com/api/auth/register",
+        // "http://localhost:5000/api/auth/register",
         { name, email, password }
       );
       console.log(response);
