@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../ContextAPI/ContextProvider";
-
+import { FaGithub } from "react-icons/fa";
+import { RxLinkedinLogo } from "react-icons/rx";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -76,18 +77,22 @@ const Login = () => {
         </button>
 
         <div className="flex gap-4 mt-4">
-          <button
-            type="button"
-            className="w-full bg-white/20 text-white py-2 rounded hover:bg-white/40 transition"
+          <Link
+             to="https://github.com/Mark1311"
+            className="w-full bg-white/20 text-white py-2 rounded hover:bg-white/40 transition flex items-center justify-center gap-2"
           >
-            <i className="fab fa-google mr-2"></i>Github
-          </button>
-          <button
-            type="button"
-            className="w-full bg-white/20 text-white py-2 rounded hover:bg-white/40 transition"
+            <FaGithub />
+            Github
+          </Link>
+
+          <Link
+            to="https://www.linkedin.com/in/bittu-kumar09/"
+            className="w-full bg-white/20 text-white py-2 rounded hover:bg-white/40 transition flex items-center justify-center gap-2"
           >
-            <i className="fab fa-facebook mr-2"></i>Linkedin
-          </button>
+            <RxLinkedinLogo />
+            Linkedin
+          </Link>
+
         </div>
 
         <p className="text-center mt-4 text-white text-sm">
