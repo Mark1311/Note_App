@@ -1,4 +1,4 @@
-Project Name: ThinkBoard App
+Project Name: ThinkBoard App (thinkboardapp.netlify.app)
 
 Tech Stack: HTML5, CSS3, JavaScript (ES6+), Tailwind CSS, React.js, NodeJs, ExpressJs, MongoDB etc.
 
