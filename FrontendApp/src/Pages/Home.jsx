@@ -36,21 +36,24 @@ export default function Home() {
 
   const fetchNotes = async () => {
     try {
-      const { data } = await axios.get("https://note-app-l2da.onrender.com/api/note", {
-        // const { data } = await axios.get("http://localhost:5000/api/note", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const { data } = await axios.get(
+        "https://note-app-l2da.onrender.com/api/note",
+        {
+          // const { data } = await axios.get("http://localhost:5000/api/note", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       setNotes(data.notes);
     } catch (error) {
       console.log(error);
     }
   };
-  
+
   const closeModal = () => {
     setModalOpen(false);
-    setCurrentNote(null); // ✅ Reset current note
+    setCurrentNote(null); 
   };
 
   const onEdit = (note) => {
@@ -61,7 +64,8 @@ export default function Home() {
   const addNotes = async (title, description) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/note/add",
+        // "http://localhost:5000/api/note/add",
+        "https://note-app-l2da.onrender.com/api/note/add",
         {
           title,
           description,
@@ -86,7 +90,8 @@ export default function Home() {
   const deleteNote = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/note/${id}`,
+        // `http://localhost:5000/api/note/${id}`,
+        `https://note-app-l2da.onrender.com/api/note/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -105,7 +110,8 @@ export default function Home() {
   const EditNotes = async (id, title, description) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/note/${id}`,
+        // `http://localhost:5000/api/note/${id}`,
+        `https://note-app-l2da.onrender.com/api/note/${id}`,
         {
           title,
           description,
@@ -130,7 +136,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <NavBar setQuery={setQuery} />
-      <div className="px-8 pt-4 grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="px-4 pt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {filteredNotes.length > 0 ? (
           filteredNotes.map((note) => (
             <NoteCart
@@ -142,12 +148,17 @@ export default function Home() {
           ))
         ) : (
           <div className="col-span-full flex flex-col items-center justify-center text-center mt-10">
-            <h1 className="text-xl font-semibold mb-4" style={{ filter: "blur(1.25px)"}}>No Notes Available...!!!</h1>
+            <h1
+              className="text-xl sm:text-2xl font-semibold mb-4"
+              style={{ filter: "blur(1.25px)" }}
+            >
+              No Notes Available...!!!
+            </h1>
             <img
               src={book}
               alt="Logo"
-              className="w-120  h-auto"
-              style={{ filter: "blur(4.5px)"}}
+              className="w-40 sm:w-60 md:w-120 h-auto"
+              style={{ filter: "blur(4.5px)" }}
             />
           </div>
         )}
@@ -155,13 +166,14 @@ export default function Home() {
 
       <button
         onClick={() => {
-          setCurrentNote(null); // ✅ Just to be safe
+          setCurrentNote(null);
           setModalOpen(true);
         }}
-        className="fixed right-4 bottom-4 text-3xl bg-teal-500 text-white font-bold p-4 rounded-full shadow-lg hover:bg-teal-600 transition duration-300"
+        className="fixed right-4 bottom-4 text-3xl bg-teal-500 text-white font-bold p-4 rounded-full shadow-lg hover:bg-teal-600 transition duration-300 sm:right-6 sm:bottom-6 md:right-4 md:bottom-4"
       >
         +
       </button>
+
       {isModalOpen && (
         <NoteModel
           closeModal={closeModal}

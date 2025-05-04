@@ -31,14 +31,10 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#080710]">
-      <div className="background">
-        <div className="shape"></div>
-        <div className="shape"></div>
-      </div>
+    <div className="relative flex items-center justify-center min-h-dvh bg-[#080710] px-4 overflow-hidden">
       <form
         onSubmit={handleSubmit}
-        className="backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl text-white rounded-lg p-10 w-full max-w-md"
+        className="backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl text-white rounded-lg p-6 sm:p-8 md:p-10 w-full max-w-md"
       >
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
@@ -77,9 +73,9 @@ const Login = () => {
           Log In
         </button>
 
-        <div className="flex gap-4 mt-4">
+        <div className="flex flex-col md:flex-row gap-4 mt-4">
           <Link
-             to="https://github.com/Mark1311"
+            to="https://github.com/Mark1311"
             className="w-full bg-white/20 text-white py-2 rounded hover:bg-white/40 transition flex items-center justify-center gap-2"
           >
             <FaGithub />
@@ -93,17 +89,16 @@ const Login = () => {
             <RxLinkedinLogo />
             Linkedin
           </Link>
-
         </div>
 
         <p className="text-center mt-4 text-white text-sm">
-          Don't have an account? 
-          <br/>
+          Don't have an account?
+          <br />
           <Link
             to="/register"
             className="underline text-white hover:text-gray-300"
           >
-             Register here..
+            Register here..
           </Link>
         </p>
       </form>

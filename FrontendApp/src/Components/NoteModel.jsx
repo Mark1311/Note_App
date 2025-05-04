@@ -9,7 +9,6 @@ const NoteModel = ({ closeModal, addNotes, currentNote, EditNotes }) => {
       setTitle(currentNote.title);
       setDescription(currentNote.description);
     } else {
-      // ✅ Jab currentNote null ho (new note), to fields blank ho
       setTitle("");
       setDescription("");
     }
@@ -25,9 +24,9 @@ const NoteModel = ({ closeModal, addNotes, currentNote, EditNotes }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-20 flex justify-center items-center">
-      <div className="bg-white p-8 rounded">
-        <h2 className="text-xl font-bold mb-4">
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+      <div className="bg-white p-6 sm:p-8 rounded w-full sm:w-auto max-w-md">
+        <h2 className="text-lg sm:text-xl font-bold mb-4 text-center">
           {currentNote ? "Edit Notes" : "Add New Note..."}
         </h2>
         <form onSubmit={handleSubmit}>
@@ -36,23 +35,26 @@ const NoteModel = ({ closeModal, addNotes, currentNote, EditNotes }) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Note Title..."
-            className="border p-2 w-full mb-4"
+            className="border p-2 w-full mb-4 rounded-md"
           />
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter Description"
-            className="border p-2 w-full mb-4"
+            className="border p-2 w-full mb-4 rounded-md"
           />
           <button
             type="submit"
-            className="bg-blue-800 text-white px-4 py-2 rounded "
+            className="bg-blue-800 text-white px-4 py-2 rounded w-full"
           >
-            {currentNote ? "Update Note" : "Add Notes"}
+            {currentNote ? "Update Note" : "Add Note"}
           </button>
         </form>
-        <button className="mt-4 text-red-600" onClick={closeModal}>
-          Cancle Note
+        <button
+          className="mt-4 text-red-600 w-full text-center"
+          onClick={closeModal}
+        >
+          Cancel Note
         </button>
       </div>
     </div>
