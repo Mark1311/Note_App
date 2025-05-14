@@ -45,6 +45,4 @@ Code Snippets or Dev Notes (for Developers).
 
 # Next Task :-
 
-* Improve Performance.
-* Responsive Layout (For Mobile).
 * Add Night Mode.
